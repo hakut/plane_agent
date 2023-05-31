@@ -9,20 +9,20 @@
 
 +!allow_landing_or_takeoff(PlaneID): runway_free & not processing_request
 <- +processing_request; 	
-.print("permission given");
-	-runway_free;
+.print("permission given to ",PlaneID);
 	+runway_occupied;
+	-runway_free;
 	.send(PlaneID, tell, permission_granted);
 	-processing_request.
 
-+!allow_landing_or_takeoff(PlaneID): runway_occupied | (runway_free & processing_request)
-<-	.print("permission denied"); 
++!allow_landing_or_takeoff(PlaneID)
+<-	.print("permission denied for ",PlaneID); 
 .send(PlaneID, tell, permission_denied).
 
 +permission_complete(Name)
 <- .print("successful landing ",Name);
-	-runway_occupied;
 	+runway_free;
+	-runway_occupied;
 	-permission_complete. 
 	
 

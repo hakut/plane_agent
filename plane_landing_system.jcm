@@ -28,6 +28,13 @@ mas plane_landing_system {
 		goals: land_or_takeoff, complete_landing_or_takeoff
 	}
     
-
+	agent plane3 : plane.asl {
+		beliefs: has_permission
+		goals: land_or_takeoff, complete_landing_or_takeoff
+	}	
+	agent plane4 : plane.asl {
+		beliefs: has_permission
+		goals: land_or_takeoff, complete_landing_or_takeoff
+	}
 }
 
