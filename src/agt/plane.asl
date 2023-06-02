@@ -11,19 +11,24 @@
 	.send(controller, achieve, allow_landing_or_takeoff(Name));
    .print("waiting response");
    .wait(1000);
-   !land_or_takeoff.
+   +waiting.
 
 +!complete_landing_or_takeoff : permission_granted
 <- .my_name(Name);
    .send(controller, tell, permission_complete(Name));
+   .print(Name," has landed");
    .kill_agent(Name).
 
-+permission_granted 
-<- !complete_landing_or_takeoff.
++waiting : permission_granted 
+<- -waiting;
+!complete_landing_or_takeoff.
         
-+permission_denied 
-<- 	!land_or_takeoff.
++waiting : permission_denied 
+<- 	-waiting;
+!land_or_takeoff.
 
++waiting
+<- !land_or_takeoff.
 
 
 { include("$jacamoJar/templates/common-cartago.asl") }
